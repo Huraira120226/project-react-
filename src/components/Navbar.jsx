@@ -1,14 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar({ userRole, logout }) {
+export default function Navbar() {
   return (
-    <nav style={{ padding: "10px 20px", backgroundColor: "#1E3A8A", color: "white" }}>
-      <h2 style={{ display: "inline-block", marginRight: "20px" }}>DocVerify</h2>
-      <Link to="/" style={{ marginRight: "15px", color: "white" }}>Home</Link>
-      {!userRole && <Link to="/login" style={{ marginRight: "15px", color: "white" }}>Login</Link>}
-      {!userRole && <Link to="/signup" style={{ color: "white" }}>Signup</Link>}
-      {userRole && <button onClick={logout} style={{ float: "right" }}>Logout</button>}
-    </nav>
+    <div style={styles.nav}>
+      <h2 style={{ color: "white" }}>Doc Verification</h2>
+
+      <div style={styles.links}>
+        <Link style={styles.link} to="/dashboard">Dashboard</Link>
+        <Link style={styles.link} to="/upload">Upload</Link>
+        <Link style={styles.link} to="/verify">Verify</Link>
+        <Link style={styles.link} to="/history">History</Link>
+        <Link style={styles.link} to="/share">Share</Link>
+        <Link style={styles.link} to="/profile">Profile</Link>
+      </div>
+    </div>
   );
 }
+
+const styles = {
+  nav: {
+    backgroundColor: "#17057a",
+    padding: "15px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  links: {
+    display: "flex",
+    gap: "20px"
+  },
+  link: {
+    color: "white",
+    textDecoration: "none",
+    fontWeight: "bold"
+  }
+};
