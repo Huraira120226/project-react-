@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function AdminNavbar() {
   return (
     <div style={styles.nav}>
-      <h2 style={{ color: "white" }}>Admin Panel</h2>
+      <h2 style={{ color: "white" }}>Admin </h2>
 
       <div style={styles.links}>
         <Link style={styles.link} to="/admin/dashboard">Dashboard</Link>
@@ -18,7 +18,7 @@ export default function AdminNavbar() {
 
 const styles = {
   nav: {
-    backgroundColor: "#111",
+    backgroundColor: "#17057a",
     padding: "15px",
     display: "flex",
     justifyContent: "space-between",
@@ -29,7 +29,7 @@ const styles = {
     gap: "20px"
   },
   link: {
-    color: "yellow",
+    color: "white",
     textDecoration: "none",
     fontWeight: "bold"
   }

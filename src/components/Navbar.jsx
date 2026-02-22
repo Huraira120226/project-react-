@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <div style={styles.nav}>
-      <h2 style={{ color: "white" }}>Doc Verification</h2>
+      <h2 style={{ color: "white", fontFamily: 'Poppins' }}>SecureDoc</h2>
 
       <div style={styles.links}>
         <Link style={styles.link} to="/dashboard">Dashboard</Link>
@@ -34,5 +34,6 @@ const styles = {
     color: "white",
     textDecoration: "none",
     fontWeight: "bold"
+   
   }
 };
