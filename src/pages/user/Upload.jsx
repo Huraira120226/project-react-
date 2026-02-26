@@ -2,69 +2,88 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 
 export default function Upload() {
-  const [hoveredBtn, setHoveredBtn] = useState(false);
-  const [hoveredFile, setHoveredFile] = useState(false);
+  const [hover, setHover] = useState(false);
 
-  const commonHoverStyle = (hovered) => ({
-    padding: "10px 25px",
-    border: "2px solid #255cf3",
-    borderRadius: "6px",
-    backgroundColor: hovered ? "#255cf3" : "white",
-    color: hovered ? "white" : "#000000",
+  const containerStyle = {
+    minHeight: "100vh",
+    backgroundColor: "#f1f5f9",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "40px 20px",
+  };
+
+  const cardStyle = {
+    width: "100%",
+    maxWidth: "520px",
+    backgroundColor: "#ffffff",
+    borderRadius: "16px",
+    boxShadow: "0 12px 30px rgba(0, 0, 0, 0.06)",
+    padding: "40px",
+  };
+
+  const headingStyle = {
+    fontSize: "22px",
+    fontWeight: "600",
+    marginBottom: "25px",
+    color: "#1e293b",
+  };
+
+  const fileBoxStyle = {
+    width: "100%",
+    border: "2px dashed #cbd5e1",
+    borderRadius: "12px",
+    padding: "20px 5px",
+    textAlign: "center",
     cursor: "pointer",
-    fontSize: "16px",
+    marginBottom: "30px",
+    backgroundColor: "#f8fafc",
+    transition: "0.3s ease",
+    display: "block"
+  };
+
+  const buttonStyle = {
+    width: "100%",
+    padding: "13px",
+    borderRadius: "10px",
+    border: "none",
+    backgroundColor: hover ? "#1d4ed8" : "#2563eb",
+    color: "#ffffff",
+    fontSize: "15px",
+    fontWeight: "600",
+    cursor: "pointer",
     transition: "all 0.3s ease",
-    transform: hovered ? "translateY(-4px)" : "translateY(0)",
-    boxShadow: hovered ? "0 6px 15px rgba(37, 92, 243, 0.4)" : "none",
-    display: "inline-block"
-  });
+    transform: hover ? "translateY(-2px)" : "translateY(0)",
+    boxShadow: hover
+      ? "0 8px 20px rgba(37, 99, 235, 0.3)"
+      : "0 4px 10px rgba(0, 0, 0, 0.05)",
+  };
 
   return (
     <>
       <Navbar />
-      <div
-        style={{
-          padding: "50px",
-          minHeight: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#EEF2FF"
-        }}
-      >
-        {/* Center Card */}
-        <div
-          style={{
-            backgroundColor: "white",
-            padding: "40px",
-            borderRadius: "12px",
-            boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
-            textAlign: "center",
-            minWidth: "300px"
-          }}
-        >
-          <h1 style={{ color: "#1D4ED8", marginBottom: "30px" }}>
-            Upload Document
-          </h1>
+      <div style={containerStyle}>
+        <div style={cardStyle}>
+          <h1 style={headingStyle}>Upload Document</h1>
 
-          {/* Custom File Input */}
-          <label
-            style={{ ...commonHoverStyle(hoveredFile), marginBottom: "20px" }}
-            onMouseEnter={() => setHoveredFile(true)}
-            onMouseLeave={() => setHoveredFile(false)}
-          >
-            Choose File
-            <input type="file" style={{ display: "none" }} />
+          <label style={fileBoxStyle}>
+            <div style={{ fontSize: "14px", color: "#475569" }}>
+              Click to choose file
+            </div>
+            <div style={{ fontSize: "12px", color: "#94a3b8", marginTop: "6px" }}>
+              PDF, DOC, or Image files
+            </div>
           </label>
 
-          <br />
+          {/* Hidden Input Outside Label */}
+          <input type="file" style={{ display: "none" }} />
 
           <button
-            style={commonHoverStyle(hoveredBtn)}
-            onMouseEnter={() => setHoveredBtn(true)}
-            onMouseLeave={() => setHoveredBtn(false)}
+            style={buttonStyle}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
           >
-            Upload
+            Upload File
           </button>
         </div>
       </div>
