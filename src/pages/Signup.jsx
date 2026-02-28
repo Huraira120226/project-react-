@@ -6,6 +6,7 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [hovered, setHovered] = useState(false);
 
   const validateEmail = (email) => {
     const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
@@ -40,44 +41,119 @@ export default function Signup() {
   };
 
   return (
-    <div style={{ padding: "50px", textAlign: "center" }}>
-      <h2>Signup</h2>
-      <form onSubmit={handleSignup}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          style={{ padding: "8px", width: "250px", marginBottom: "10px" }}
-        />
-        <br />
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h2 style={styles.title}>Create Account</h2>
+        <p style={styles.subtitle}>Sign up to get started</p>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{ padding: "8px", width: "250px", marginBottom: "10px" }}
-        />
-        <br />
+        <form onSubmit={handleSignup} style={styles.form}>
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            style={styles.input}
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={{ padding: "8px", width: "250px", marginBottom: "10px" }}
-        />
-        <br />
+          <input
+            type="email"
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={styles.input}
+          />
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        {success && <p style={{ color: "green" }}>{success}</p>}
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            style={styles.input}
+          />
 
-        <button type="submit">Signup</button>
-      </form>
+          {error && <p style={styles.error}>{error}</p>}
+          {success && <p style={styles.success}>{success}</p>}
+
+          <button
+            type="submit"
+            style={{
+              ...styles.button,
+              backgroundColor: hovered ? "#1d4ed8" : "#255cf3",
+              transform: hovered ? "translateY(-3px)" : "translateY(0)"
+            }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            Signup
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "linear-gradient(135deg, #e0e7ff, #f8fafc)"
+  },
+  card: {
+    width: "400px",
+    padding: "40px",
+    borderRadius: "12px",
+    backgroundColor: "#ffffff",
+    boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
+    textAlign: "center"
+  },
+  title: {
+    marginBottom: "5px",
+    fontSize: "24px",
+    fontWeight: "600",
+    color: "#111827"
+  },
+  subtitle: {
+    marginBottom: "25px",
+    fontSize: "14px",
+    color: "#6b7280"
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "15px"
+  },
+  input: {
+    padding: "12px",
+    borderRadius: "8px",
+    border: "1px solid #d1d5db",
+    fontSize: "14px",
+    outline: "none",
+    transition: "0.3s"
+  },
+  error: {
+    color: "#dc2626",
+    fontSize: "13px",
+    marginTop: "-5px"
+  },
+  success: {
+    color: "#16a34a",
+    fontSize: "13px",
+    marginTop: "-5px"
+  },
+  button: {
+    padding: "12px",
+    borderRadius: "8px",
+    border: "none",
+    color: "white",
+    fontSize: "15px",
+    fontWeight: "500",
+    cursor: "pointer",
+    transition: "all 0.3s ease",
+    boxShadow: "0 8px 20px rgba(37, 92, 243, 0.3)"
+  }
+};

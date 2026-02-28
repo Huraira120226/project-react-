@@ -9,13 +9,11 @@ export default function Login({ setUserRole }) {
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
-    // only gmail format
     const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
     return gmailPattern.test(email);
   };
 
   const validatePassword = (password) => {
-    // 1 capital, 1 small, 1 number, 1 special, min 8
     const passwordPattern =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordPattern.test(password);
@@ -47,58 +45,105 @@ export default function Login({ setUserRole }) {
     }
   };
 
-  const buttonStyle = {
-    padding: "10px 25px",
-    border: "2px solid #255cf3",
-    borderRadius: "6px",
-    backgroundColor: hovered ? "#255cf3" : "white",
-    color: hovered ? "white" : "#000000",
-    cursor: "pointer",
-    fontSize: "16px",
-    transition: "all 0.3s ease",
-    transform: hovered ? "translateY(-4px)" : "translateY(0)",
-    boxShadow: hovered
-      ? "0 6px 15px rgba(37, 92, 243, 0.4)"
-      : "none"
-  };
-
   return (
-    <div style={{ padding: "50px", textAlign: "center" }}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{ padding: "8px", width: "250px", marginBottom: "10px" }}
-        />
-        <br />
+    <div style={styles.container}>
+      <div style={styles.card}>
+        <h2 style={styles.title}>Welcome Back</h2>
+        <p style={styles.subtitle}>Login to your account</p>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={{ padding: "8px", width: "250px", marginBottom: "10px" }}
-        />
-        <br />
+        <form onSubmit={handleLogin} style={styles.form}>
+          <input
+            type="email"
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={styles.input}
+          />
 
-        {error && (
-          <p style={{ color: "red", fontSize: "14px" }}>{error}</p>
-        )}
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            style={styles.input}
+          />
 
-        <button
-          type="submit"
-          style={buttonStyle}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          Login
-        </button>
-      </form>
+          {error && <p style={styles.error}>{error}</p>}
+
+          <button
+            type="submit"
+            style={{
+              ...styles.button,
+              backgroundColor: hovered ? "#1d4ed8" : "#255cf3",
+              transform: hovered ? "translateY(-3px)" : "translateY(0)"
+            }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "linear-gradient(135deg, #e0e7ff, #f8fafc)"
+  },
+  card: {
+    width: "380px",
+    padding: "40px",
+    borderRadius: "12px",
+    backgroundColor: "#ffffff",
+    boxShadow: "0 15px 35px rgba(0,0,0,0.1)",
+    textAlign: "center"
+  },
+  title: {
+    marginBottom: "5px",
+    fontSize: "24px",
+    fontWeight: "600",
+    color: "#111827"
+  },
+  subtitle: {
+    marginBottom: "25px",
+    fontSize: "14px",
+    color: "#6b7280"
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "15px"
+  },
+  input: {
+    padding: "12px",
+    borderRadius: "8px",
+    border: "1px solid #d1d5db",
+    fontSize: "14px",
+    outline: "none",
+    transition: "0.3s",
+  },
+  error: {
+    color: "#dc2626",
+    fontSize: "13px",
+    marginTop: "-5px"
+  },
+  button: {
+    padding: "12px",
+    borderRadius: "8px",
+    border: "none",
+    color: "white",
+    fontSize: "15px",
+    fontWeight: "500",
+    cursor: "pointer",
+    transition: "all 0.3s ease",
+    boxShadow: "0 8px 20px rgba(37, 92, 243, 0.3)"
+  }
+};
