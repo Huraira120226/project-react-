@@ -2,6 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
 import User from "./models/User.js";
+import dns from "node:dns";
+
+// Force Google DNS to bypass ISP blocking
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 const app = express();
 app.use(express.json());
